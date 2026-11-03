@@ -13,10 +13,11 @@ select m[1],
        case when m[3] like '"%"' then replace(substr(m[3], 2, length(m[3]) - 2), '""', '"') else m[3] end
 from (
   select regexp_match(linea, '^([^,]+),([^,]+),(.*)$') as m
+  -- El CSV usa saltos de línea de Windows (CRLF).
   from regexp_split_to_table(
          (select content
             from extensions.http_get('https://raw.githubusercontent.com/TotalSecurity-SH/catalogos-sat/main/supabase/seed/catalogos.csv')),
-         E'\n') with ordinality as t(linea, n)
+         E'\r?\n') with ordinality as t(linea, n)
   where n > 1 and linea <> ''
 ) filas;
 
