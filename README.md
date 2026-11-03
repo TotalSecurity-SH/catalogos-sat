@@ -87,6 +87,8 @@ DATABASE_URL="postgresql://postgres:<contraseña>@db.<proyecto>.supabase.co:5432
 
 El script aplica la migración, carga el CSV y verifica con una búsqueda de prueba.
 
+**Sin psql:** en el **SQL Editor** de Supabase ejecuta el contenido de la migración y después `supabase/seed/cargar_desde_github.sql`, que descarga el CSV de este repositorio y lo inserta.
+
 ## 🔑 Variables de entorno
 
 | Variable | Dónde se obtiene |
